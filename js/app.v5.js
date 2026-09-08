@@ -6,48 +6,6 @@
 (function () {
   'use strict';
 
-  // --- Particle System ---
-  const canvas = document.getElementById('bg');
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  const PARTICLE_COUNT = 10;
-
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-
-  function initParticles() {
-    particles = Array.from({ length: PARTICLE_COUNT }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.14,
-      vy: (Math.random() - 0.5) * 0.14,
-      r: Math.random() * 2.2 + 1.2,
-      a: Math.random() * 0.18 + 0.05,
-    }));
-  }
-
-  function drawParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < particles.length; i++) {
-      const p = particles[i];
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(176,130,96,${p.a})`;
-      ctx.fill();
-    }
-    requestAnimationFrame(drawParticles);
-  }
-
-  resize();
-  initParticles();
-  drawParticles();
-  window.addEventListener('resize', () => { resize(); initParticles(); });
-
   // --- Scroll Reveal ---
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); revealObserver.unobserve(e.target); } });
