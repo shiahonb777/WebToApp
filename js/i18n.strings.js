@@ -29,6 +29,9 @@
     'nav.langLabel': 'Language',
     'nav.github': 'View source on GitHub',
 
+    'hero.kicker': 'WEBTOAPP / WEBSITE TO APP',
+    'hero.titleLine1': 'Turn websites',
+    'hero.titleLine2': 'into apps.',
     'hero.badge': 'Open source · Free · No sign-up',
     'hero.subtitle': 'Enter a link. Seconds later it can be installed, shared and used like an app. From iPhone to desktop, it is the same generated result.',
     'hero.urlPlaceholder': 'Enter a website link',
@@ -232,6 +235,9 @@
     'nav.langLabel': '语言',
     'nav.github': '在 GitHub 上查看源码',
 
+    'hero.kicker': 'WEBTOAPP / 网站到应用',
+    'hero.titleLine1': '把网站',
+    'hero.titleLine2': '做成应用。',
     'hero.badge': '开源 · 免费 · 无需登录',
     'hero.subtitle': '输入一个链接。几秒钟后，它就能被安装、被分享，也能像应用一样被使用。从 iPhone 到桌面端，用的是同一套生成结果。',
     'hero.urlPlaceholder': '输入网站链接',
@@ -435,6 +441,9 @@
     'nav.langLabel': '言語',
     'nav.github': 'GitHub でソースを見る',
 
+    'hero.kicker': 'WEBTOAPP / ウェブからアプリへ',
+    'hero.titleLine1': 'ウェブサイトを',
+    'hero.titleLine2': 'アプリに。',
     'hero.badge': 'オープンソース · 無料 · 登録不要',
     'hero.subtitle': 'リンクを入力するだけ。数秒後にはインストール・共有でき、アプリのように使えます。iPhone からデスクトップまで、同じ生成結果が使えます。',
     'hero.urlPlaceholder': 'ウェブサイトのリンクを入力',
@@ -614,6 +623,9 @@
     'nav.langLabel': 'اللغة',
     'nav.github': 'عرض المصدر على GitHub',
 
+    'hero.kicker': 'WEBTOAPP / من الموقع إلى التطبيق',
+    'hero.titleLine1': 'حوّل المواقع',
+    'hero.titleLine2': 'إلى تطبيقات.',
     'hero.badge': 'مفتوح المصدر · مجاني · بدون تسجيل',
     'hero.subtitle': 'أدخل رابطًا. خلال ثوانٍ يمكن تثبيته ومشاركته واستخدامه كتطبيق. من iPhone إلى سطح المكتب، النتيجة المُولّدة واحدة.',
     'hero.urlPlaceholder': 'أدخل رابط الموقع',
@@ -793,6 +805,9 @@
     'nav.langLabel': 'Язык',
     'nav.github': 'Открыть исходный код на GitHub',
 
+    'hero.kicker': 'WEBTOAPP / САЙТ В ПРИЛОЖЕНИЕ',
+    'hero.titleLine1': 'Превратите сайты',
+    'hero.titleLine2': 'в приложения.',
     'hero.badge': 'Открытый код · Бесплатно · Без регистрации',
     'hero.subtitle': 'Введите ссылку. Через несколько секунд её можно установить, отправить и использовать как приложение. От iPhone до десктопа — один и тот же результат.',
     'hero.urlPlaceholder': 'Введите ссылку на сайт',
@@ -972,6 +987,9 @@
     'nav.langLabel': 'Idioma',
     'nav.github': 'Ver el código en GitHub',
 
+    'hero.kicker': 'WEBTOAPP / DEL SITIO A LA APP',
+    'hero.titleLine1': 'Convierte sitios web',
+    'hero.titleLine2': 'en aplicaciones.',
     'hero.badge': 'Código abierto · Gratis · Sin registro',
     'hero.subtitle': 'Introduce un enlace. En segundos se puede instalar, compartir y usar como una app. Del iPhone al escritorio, es el mismo resultado generado.',
     'hero.urlPlaceholder': 'Introduce el enlace del sitio web',
@@ -1151,6 +1169,9 @@
     'nav.langLabel': 'Idioma',
     'nav.github': 'Ver o código no GitHub',
 
+    'hero.kicker': 'WEBTOAPP / DO SITE AO APP',
+    'hero.titleLine1': 'Transforme sites',
+    'hero.titleLine2': 'em aplicativos.',
     'hero.badge': 'Código aberto · Grátis · Sem cadastro',
     'hero.subtitle': 'Insira um link. Em segundos ele pode ser instalado, compartilhado e usado como um app. Do iPhone ao desktop, é o mesmo resultado gerado.',
     'hero.urlPlaceholder': 'Insira o link do site',
@@ -1330,6 +1351,9 @@
     'nav.langLabel': 'Langue',
     'nav.github': 'Voir le code sur GitHub',
 
+    'hero.kicker': 'WEBTOAPP / DU SITE À L\u2019APPLI',
+    'hero.titleLine1': 'Transformez les sites web',
+    'hero.titleLine2': 'en applications.',
     'hero.badge': 'Open source · Gratuit · Sans inscription',
     'hero.subtitle': 'Saisissez un lien. En quelques secondes, il peut être installé, partagé et utilisé comme une application. De l\u2019iPhone au bureau, c\u2019est le même résultat généré.',
     'hero.urlPlaceholder': 'Saisissez le lien du site web',
@@ -1509,6 +1533,9 @@
     'nav.langLabel': 'Sprache',
     'nav.github': 'Quellcode auf GitHub ansehen',
 
+    'hero.kicker': 'WEBTOAPP / VON DER WEBSITE ZUR APP',
+    'hero.titleLine1': 'Websites in',
+    'hero.titleLine2': 'Apps verwandeln.',
     'hero.badge': 'Open Source · Kostenlos · Ohne Anmeldung',
     'hero.subtitle': 'Gib einen Link ein. Sekunden später lässt er sich installieren, teilen und wie eine App nutzen. Vom iPhone bis zum Desktop – dasselbe generierte Ergebnis.',
     'hero.urlPlaceholder': 'Website-Link eingeben',
