@@ -100,7 +100,6 @@
   const previewOpenBtn = document.getElementById('preview-open-btn');
   const historyList = document.getElementById('history-list');
   const historyEmpty = document.getElementById('history-empty');
-  const historyRecoverBtn = document.getElementById('history-recover-btn');
   const historyExportBtn = document.getElementById('history-export-btn');
   const historyImportBtn = document.getElementById('history-import-btn');
   const historyImportInput = document.getElementById('history-import-input');
@@ -369,15 +368,6 @@
       headers: apiHeaders(),
     });
     if (!res.ok) throw new Error('attach failed');
-    return res.json();
-  }
-
-  async function recoverHistoryItems() {
-    const res = await fetch('/api/history/recover', {
-      method: 'POST',
-      headers: apiHeaders(),
-    });
-    if (!res.ok) throw new Error('recover failed');
     return res.json();
   }
 
@@ -1277,10 +1267,12 @@
     if (!window.confirm(t('history.confirmDeleteBulk', { n: String(ids.length) }))) return;
     try {
       historyDeleteSelectedBtn.disabled = true;
-      await Promise.all(ids.map((id) => fetch(`/api/history/${encodeURIComponent(id)}`, {
-        method: 'DELETE',
-        headers: { 'X-Device-Fingerprint': deviceFingerprint },
-      })));
+      const res = await fetch('/api/history/delete-bulk', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Device-Fingerprint': deviceFingerprint },
+        body: JSON.stringify({ app_ids: ids }),
+      });
+      if (!res.ok) throw new Error('bulk delete failed');
       setHistorySelectMode(false);
       await loadHistory();
     } catch (_err) {
@@ -1334,23 +1326,6 @@
       historyImportInput.value = '';
     }
   });
-
-  if (historyRecoverBtn) {
-    historyRecoverBtn.addEventListener('click', async () => {
-      const original = historyRecoverBtn.textContent;
-      historyRecoverBtn.disabled = true;
-      historyRecoverBtn.textContent = t('history.recovering');
-      try {
-        const data = await recoverHistoryItems();
-        renderHistory((data.history && data.history.items) || []);
-      } catch (_err) {
-        alert(t('err.recoverRetry'));
-      } finally {
-        historyRecoverBtn.disabled = false;
-        historyRecoverBtn.textContent = original;
-      }
-    });
-  }
 
   // --- Recipe Cards ---
   document.querySelectorAll('.recipe-card').forEach(card => {

@@ -593,6 +593,23 @@ class HistoryStore:
             self._set_device_app_ids_locked(device_fingerprint, filtered, _utc_now())
             return True
 
+    def remove_many_from_device(self, device_fingerprint: Optional[str], app_ids: List[str]) -> List[str]:
+        """Bulk variant of remove_from_device: one lock acquisition and one
+        write instead of N, so a large clean-up does not hammer the store."""
+        wanted = [app_id for app_id in (app_ids or []) if app_id]
+        if not device_fingerprint or not wanted:
+            return []
+        with self._lock:
+            self._flush_visits_locked()
+            previous = self._get_device_app_ids_locked(device_fingerprint)
+            previous_set = set(previous)
+            removed_set = {app_id for app_id in wanted if app_id in previous_set}
+            if not removed_set:
+                return []
+            filtered = [value for value in previous if value not in removed_set]
+            self._set_device_app_ids_locked(device_fingerprint, filtered, _utc_now())
+            return [app_id for app_id in wanted if app_id in removed_set]
+
     def list_expired_apps(self, cutoff_iso: str) -> List[dict]:
         cutoff = _parse_utc(cutoff_iso)
         if cutoff is None:

@@ -1221,10 +1221,6 @@ section {
   margin: 0;
 }
 
-.history-recover-btn {
-  margin-top: 14px;
-}
-
 .history-list {
   display: flex;
   flex-direction: column;

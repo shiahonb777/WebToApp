@@ -418,6 +418,10 @@ class HistoryImportPayload(BaseModel):
     items: List[dict] = []
 
 
+class HistoryBulkDeletePayload(BaseModel):
+    app_ids: List[str] = []
+
+
 # --- API Routes ---
 @app.post("/api/analyze")
 async def analyze_url(req: AnalyzeRequest):
@@ -1161,19 +1165,6 @@ async def attach_history_item(app_id: str, request: Request):
     return {"attached": True, "app_id": app_id, "history": _history_payload(request)}
 
 
-@app.post("/api/history/recover")
-async def recover_history(request: Request):
-    device_fingerprint = _device_fingerprint(request)
-    if not device_fingerprint:
-        return {"recovered": 0, "history": _history_payload(request)}
-    recovered = 0
-    for recipe_path in sorted(APPS_DIR.glob("*/recipe.json"), key=lambda item: item.stat().st_mtime, reverse=True):
-        app_id = recipe_path.parent.name
-        history_store.attach_app(device_fingerprint, app_id)
-        recovered += 1
-    return {"recovered": recovered, "history": _history_payload(request)}
-
-
 def _decode_site_files(item: dict):
     """Decode the base64 site bundle embedded in an exported history item."""
     raw_files = (item.get("site_files") or [])
@@ -1275,6 +1266,26 @@ async def delete_history_item(app_id: str, request: Request):
     if not removed:
         raise HTTPException(404, "History item not found")
     return {"removed": True, "app_id": app_id, "history": _history_payload(request)}
+
+
+HISTORY_BULK_DELETE_MAX = 500
+
+
+@app.post("/api/history/delete-bulk")
+def delete_history_bulk(payload: HistoryBulkDeletePayload, request: Request):
+    # Sync endpoint on purpose: FastAPI runs it in the threadpool, so the
+    # blocking SQLite work stays off the event loop while a large clean-up
+    # removes every entry in one lock acquisition and one payload rebuild.
+    device_fingerprint = _device_fingerprint(request)
+    if not device_fingerprint:
+        raise HTTPException(400, "Missing device fingerprint")
+    app_ids = [app_id for app_id in payload.app_ids if app_id]
+    if not app_ids:
+        return {"removed": [], "history": _history_payload(request)}
+    if len(app_ids) > HISTORY_BULK_DELETE_MAX:
+        raise HTTPException(400, "Too many app ids")
+    removed = history_store.remove_many_from_device(device_fingerprint, app_ids)
+    return {"removed": removed, "history": _history_payload(request)}
 
 
 @app.on_event("shutdown")
