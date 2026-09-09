@@ -104,6 +104,12 @@
   const historyExportBtn = document.getElementById('history-export-btn');
   const historyImportBtn = document.getElementById('history-import-btn');
   const historyImportInput = document.getElementById('history-import-input');
+  const historyManageBtn = document.getElementById('history-manage-btn');
+  const historySelectBar = document.getElementById('history-select-bar');
+  const historySelectAll = document.getElementById('history-select-all');
+  const historySelectCount = document.getElementById('history-select-count');
+  const historyDeleteSelectedBtn = document.getElementById('history-delete-selected-btn');
+  const historyCancelSelectBtn = document.getElementById('history-cancel-select-btn');
   const modeUrlBtn = document.getElementById('mode-url-btn');
   const modeHtmlBtn = document.getElementById('mode-html-btn');
   const urlInputWrap = document.getElementById('url-input-wrap');
@@ -122,6 +128,8 @@
   let restoreIconLabel = '';
   let restoreIconFileName = '';
   let lastHistoryItems = [];
+  let historySelectMode = false;
+  const historySelected = new Set();
   let restoreIconButtonLabel = '';
   let deviceFingerprint = '';
   const DEVICE_STORAGE_KEY = 'webtoapp-device-fingerprint-v1';
@@ -478,6 +486,8 @@
     lastHistoryItems = list;
     historyList.innerHTML = '';
     historyEmpty.classList.toggle('hidden', list.length > 0);
+    historyList.classList.toggle('selecting', historySelectMode);
+    updateHistorySelectBar();
     if (!list.length) return;
 
     const fragment = document.createDocumentFragment();
@@ -498,10 +508,12 @@
         ? `<span class="history-badge-html">${escapeHtml(t('history.badgeHtml'))}</span>`
         : '';
       card.className = 'history-card';
+      card.classList.toggle('selected', historySelected.has(item.app_id || ''));
       card._historyItem = item;
       card.innerHTML = `
         <div class="history-main">
           <div class="history-name-row">
+            <label class="history-check"><input type="checkbox" data-select="${escapeHtml(item.app_id || '')}" ${historySelected.has(item.app_id || '') ? 'checked' : ''}></label>
             ${iconHtml}
             <div class="history-name-block">
               <div class="history-name">${escapeHtml(item.name || item.app_id)}${htmlBadge}</div>
@@ -542,7 +554,6 @@
           <button class="history-action" type="button" data-regenerate="${escapeHtml(item.app_id || '')}">${escapeHtml(t('history.regenerate'))}</button>
           <button class="history-action" type="button" data-edit="${escapeHtml(item.app_id || '')}">${escapeHtml(t('history.editForm'))}</button>
           <button class="history-action" type="button" data-copy="${escapeHtml(publicPath)}">${escapeHtml(t('history.copyLink'))}</button>
-          <button class="history-action history-action-danger" type="button" data-delete="${escapeHtml(item.app_id || '')}">${escapeHtml(t('history.remove'))}</button>
         </div>
       `;
       fragment.appendChild(card);
@@ -1176,10 +1187,24 @@
   });
 
   historyList.addEventListener('click', async (event) => {
-    const target = event.target.closest('[data-open], [data-copy], [data-delete], [data-edit], [data-regenerate]');
-    if (!target) return;
-    const card = target.closest('.history-card');
+    const card = event.target.closest('.history-card');
     const item = card && card._historyItem;
+    if (historySelectMode) {
+      const id = (item && item.app_id) || '';
+      if (!id) return;
+      const box = event.target.closest('input[data-select]');
+      if (box) {
+        if (box.checked) historySelected.add(id); else historySelected.delete(id);
+      } else if (historySelected.has(id)) {
+        historySelected.delete(id);
+      } else {
+        historySelected.add(id);
+      }
+      renderHistory(lastHistoryItems);
+      return;
+    }
+    const target = event.target.closest('[data-open], [data-copy], [data-edit], [data-regenerate]');
+    if (!target) return;
     if (target.dataset.open) {
       window.open(target.dataset.open, '_blank', 'noopener,noreferrer');
       return;
@@ -1216,22 +1241,52 @@
       }
       return;
     }
-    if (target.dataset.delete) {
-      if (!window.confirm(t('history.confirmDelete'))) return;
-      try {
-        target.disabled = true;
-        const res = await fetch(`/api/history/${encodeURIComponent(target.dataset.delete)}`, {
-          method: 'DELETE',
-          headers: { 'X-Device-Fingerprint': deviceFingerprint },
-        });
-        if (!res.ok) throw new Error('delete failed');
-        const data = await res.json();
-        renderHistory((data.history && data.history.items) || []);
-      } catch (_err) {
-        alert(t('err.removeRetry'));
-      } finally {
-        target.disabled = false;
-      }
+  });
+
+  function updateHistorySelectBar() {
+    const total = lastHistoryItems.length;
+    historySelectCount.textContent = t('history.selectedCount', { n: String(historySelected.size) });
+    historyDeleteSelectedBtn.disabled = historySelected.size === 0;
+    historySelectAll.checked = total > 0 && historySelected.size === total;
+  }
+
+  function setHistorySelectMode(on) {
+    historySelectMode = on;
+    if (!on) historySelected.clear();
+    historySelectBar.classList.toggle('hidden', !on);
+    historyManageBtn.classList.toggle('hidden', on);
+    historyExportBtn.classList.toggle('hidden', on);
+    historyImportBtn.classList.toggle('hidden', on);
+    renderHistory(lastHistoryItems);
+  }
+
+  historyManageBtn.addEventListener('click', () => setHistorySelectMode(true));
+  historyCancelSelectBtn.addEventListener('click', () => setHistorySelectMode(false));
+
+  historySelectAll.addEventListener('change', () => {
+    historySelected.clear();
+    if (historySelectAll.checked) {
+      lastHistoryItems.forEach((entry) => historySelected.add(entry.app_id || ''));
+    }
+    renderHistory(lastHistoryItems);
+  });
+
+  historyDeleteSelectedBtn.addEventListener('click', async () => {
+    const ids = Array.from(historySelected);
+    if (!ids.length) return;
+    if (!window.confirm(t('history.confirmDeleteBulk', { n: String(ids.length) }))) return;
+    try {
+      historyDeleteSelectedBtn.disabled = true;
+      await Promise.all(ids.map((id) => fetch(`/api/history/${encodeURIComponent(id)}`, {
+        method: 'DELETE',
+        headers: { 'X-Device-Fingerprint': deviceFingerprint },
+      })));
+      setHistorySelectMode(false);
+      await loadHistory();
+    } catch (_err) {
+      alert(t('err.removeRetry'));
+    } finally {
+      historyDeleteSelectedBtn.disabled = false;
     }
   });
 

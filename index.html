@@ -14,9 +14,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+SC:wght@400;500;600;700;900&family=Spectral:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260908-design1">
-  <script src="js/i18n.js?v=20260908-design1"></script>
-  <script src="js/i18n.strings.js?v=20260908-design1"></script>
+  <link rel="stylesheet" href="css/style.css?v=20260909-hist1">
+  <script src="js/i18n.js?v=20260909-hist1"></script>
+  <script src="js/i18n.strings.js?v=20260909-hist1"></script>
 </head>
 <body>
   <header id="nav">
@@ -380,6 +380,7 @@
             <p class="history-sub" data-i18n="history.sub">Links generated on this device are saved here. You can view visit counts, or export them and import on another device.</p>
           </div>
           <div class="history-toolbar">
+            <button id="history-manage-btn" class="btn-secondary" type="button" data-i18n="history.manage">Clean up</button>
             <button id="history-export-btn" class="btn-secondary" type="button" data-i18n="history.export">Export history</button>
             <button id="history-import-btn" class="btn-secondary" type="button" data-i18n="history.import">Import history</button>
             <input id="history-import-input" class="sr-only" type="file" accept="application/json">
@@ -390,6 +391,17 @@
             <p data-i18n="history.empty">No build history on this device yet. Generate an app first, or import a record exported from another device.</p>
             <button id="history-recover-btn" class="btn-secondary history-recover-btn" type="button" data-i18n="history.recover">Recover existing builds</button>
           </div>
+          <div id="history-select-bar" class="history-select-bar hidden">
+            <label class="history-select-all">
+              <input id="history-select-all" type="checkbox">
+              <span data-i18n="history.selectAll">Select all</span>
+            </label>
+            <span id="history-select-count" class="history-select-count"></span>
+            <div class="history-select-actions">
+              <button id="history-delete-selected-btn" class="btn-secondary history-delete-selected" type="button" data-i18n="history.deleteSelected">Delete selected</button>
+              <button id="history-cancel-select-btn" class="btn-secondary" type="button" data-i18n="history.cancelSelect">Cancel</button>
+            </div>
+          </div>
           <div id="history-list" class="history-list"></div>
         </div>
       </div>
@@ -397,6 +409,6 @@
 
   </main>
 
-  <script src="js/app.v5.js?v=20260908-design1"></script>
+  <script src="js/app.v5.js?v=20260909-hist1"></script>
 </body>
 </html>
