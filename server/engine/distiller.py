@@ -796,20 +796,18 @@ class Distiller:
 <link rel="icon" href="/assets/site-logo.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+SC:wght@400;500;600;700;900&family=Spectral:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{{
-  --paper:#f4ebe0;
-  --paper-deep:#eadbc8;
-  --ink:#181412;
-  --ink-soft:rgba(24,20,18,.68);
-  --line:rgba(24,20,18,.1);
-  --line-strong:rgba(24,20,18,.16);
+  --paper:#f7f3ec;
+  --ink:#1e1914;
+  --ink-soft:rgba(30,25,20,.68);
+  --line:rgba(30,25,20,.1);
+  --line-strong:rgba(30,25,20,.16);
   --accent:#c97953;
-  --accent-deep:#241d19;
-  --surface:rgba(255,251,246,.72);
-  --surface-strong:rgba(255,252,248,.88);
-  --shadow:0 28px 80px rgba(94,62,39,.12);
+  --accent-deep:#1e1914;
+  --surface:#fbf8f3;
+  --surface-strong:#fbf8f3;
 }}
 *{{margin:0;padding:0;box-sizing:border-box}}
 html{{-webkit-font-smoothing:antialiased}}
@@ -817,9 +815,7 @@ body{{
   min-height:100vh;
   font-family:'Inter',system-ui,sans-serif;
   color:var(--ink);
-  background:
-    radial-gradient(circle at top right, rgba(201,121,83,.12), transparent 22%),
-    linear-gradient(180deg, #f6efe8 0%, #efe4d6 100%);
+  background:var(--paper);
 }}
 a{{color:inherit;text-decoration:none}}
 .page{{max-width:1360px;margin:0 auto;padding:28px 28px 44px}}
@@ -828,33 +824,33 @@ a{{color:inherit;text-decoration:none}}
 .brand img{{display:block;width:28px;height:28px;border-radius:8px;object-fit:cover}}
 .brand-note{{font-size:.82rem;color:var(--ink-soft);letter-spacing:.14em;text-transform:uppercase}}
 .nav-right{{display:inline-flex;align-items:center;gap:14px}}
-#dl-lang{{appearance:none;-webkit-appearance:none;font:inherit;font-size:.9rem;color:var(--ink);background-color:rgba(255,251,246,.72);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23736357' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;border:1px solid var(--line-strong);border-radius:999px;padding:7px 32px 7px 14px;cursor:pointer}}
+#dl-lang{{appearance:none;-webkit-appearance:none;font:inherit;font-size:.9rem;color:var(--ink);background-color:rgba(255,251,246,.72);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23736357' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;border:1px solid var(--line-strong);border-radius:8px;padding:7px 32px 7px 14px;cursor:pointer}}
 [dir="rtl"] #dl-lang{{background-position:left 12px center;padding:7px 14px 7px 32px}}
-.hero{{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(420px,.98fr);gap:28px;align-items:stretch;padding-top:34px}}
-.hero-copy{{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:24px;padding:34px;background:linear-gradient(180deg, rgba(255,252,248,.78), rgba(255,248,241,.54));box-shadow:var(--shadow)}}
-.eyebrow{{margin-bottom:18px;font-size:.84rem;letter-spacing:.18em;color:rgba(24,20,18,.42);text-transform:uppercase}}
-.title{{max-width:7ch;font-family:'Noto Serif SC','Songti SC',serif;font-size:clamp(3.2rem,6.4vw,5.8rem);font-weight:900;line-height:.92;letter-spacing:-.05em}}
-.meta-row{{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}}
-.meta-chip{{display:inline-flex;align-items:center;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(255,251,246,.72);font-size:.92rem;color:var(--ink-soft)}}
+.hero{{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(420px,.98fr);gap:36px;align-items:start;padding-top:44px}}
+.hero-copy{{padding:8px 0 0}}
+.eyebrow{{margin-bottom:14px;font-size:.78rem;letter-spacing:.16em;color:rgba(30,25,20,.46);text-transform:uppercase}}
+.title{{max-width:14ch;font-family:'Spectral','Noto Serif SC','Songti SC',serif;font-size:clamp(2.2rem,4.2vw,3.4rem);font-weight:600;line-height:1.1;letter-spacing:0}}
+.meta-row{{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}}
+.meta-chip{{display:inline-flex;align-items:center;padding:7px 12px;border:1px solid var(--line);border-radius:6px;background:transparent;font-size:.86rem;color:var(--ink-soft)}}
 .desc{{max-width:30rem;margin-top:20px;font-size:1rem;line-height:1.78;color:var(--ink-soft)}}
 .source{{margin-top:16px;font-size:.9rem;color:rgba(24,20,18,.48);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}}
-.hero-panel{{display:flex;flex-direction:column;justify-content:space-between;border:1px solid var(--line);border-radius:24px;background:var(--surface-strong);box-shadow:var(--shadow);overflow:hidden}}
-.app-top{{padding:28px 28px 20px;border-bottom:1px solid var(--line)}}
+.hero-panel{{display:flex;flex-direction:column;justify-content:space-between;border:1px solid var(--line);border-radius:16px;background:var(--surface-strong);overflow:hidden}}
+.app-top{{padding:26px 26px 20px;border-bottom:1px solid var(--line)}}
 .app-head{{display:flex;align-items:center;gap:18px}}
-.icon{{width:82px;height:82px;border-radius:20px;flex-shrink:0;object-fit:contain;background:rgba(255,255,255,.56);border:1px solid rgba(24,20,18,.08);padding:10px;box-shadow:0 10px 24px rgba(84,58,39,.08)}}
-.app-title{{font-family:'Noto Serif SC','Songti SC',serif;font-size:2rem;line-height:1.06;letter-spacing:-.04em}}
+.icon{{width:72px;height:72px;border-radius:14px;flex-shrink:0;object-fit:contain;background:rgba(255,255,255,.7);border:1px solid rgba(30,25,20,.08);padding:8px}}
+.app-title{{font-family:'Spectral','Noto Serif SC','Songti SC',serif;font-size:1.6rem;line-height:1.15;letter-spacing:0}}
 .app-sub{{margin-top:8px;font-size:.95rem;color:var(--ink-soft);line-height:1.7}}
 .app-actions{{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}}
-.action{{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--line-strong);background:rgba(255,255,255,.45);font-size:.95rem;font-weight:600}}
-.action.primary{{background:linear-gradient(135deg, #1f1a17 0%, #2d221c 100%);border-color:transparent;color:#fff8f2}}
+.action{{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 16px;border-radius:8px;border:1px solid var(--line-strong);background:rgba(255,255,255,.6);font-size:.95rem;font-weight:600}}
+.action.primary{{background:var(--accent-deep);border-color:transparent;color:#fff8f2}}
   .platform-wrap{{padding:24px 24px 26px}}
-  .ios-install{{margin-bottom:18px;padding:18px;border:1px solid rgba(24,20,18,.08);border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,248,241,.78))}}
+  .ios-install{{margin-bottom:18px;padding:18px;border:1px solid rgba(30,25,20,.08);border-radius:12px;background:rgba(255,255,255,.5)}}
   .ios-top{{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}}
   .ios-title{{font-size:1rem;font-weight:700}}
-  .ios-badge{{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:999px;font-size:.78rem;font-weight:700;white-space:nowrap}}
+  .ios-badge{{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:6px;font-size:.78rem;font-weight:700;white-space:nowrap}}
   .ios-badge-ok{{background:#d9f4e4;color:#17603d}}
   .ios-badge-warn{{background:#f8ebc7;color:#8b6114}}
-  .android-badge{{display:inline-flex;align-items:center;height:24px;margin-left:8px;padding:0 8px;border-radius:999px;font-size:.72rem;font-weight:700;vertical-align:middle;white-space:nowrap}}
+  .android-badge{{display:inline-flex;align-items:center;height:22px;margin-left:8px;padding:0 8px;border-radius:6px;font-size:.72rem;font-weight:700;vertical-align:middle;white-space:nowrap}}
   .android-badge-ok{{background:#d9f4e4;color:#17603d}}
   .android-badge-warn{{background:#f8ebc7;color:#8b6114}}
   .plat-name{{display:flex;align-items:center;flex-wrap:wrap;gap:4px}}
@@ -862,9 +858,9 @@ a{{color:inherit;text-decoration:none}}
   .ios-steps{{margin-top:12px;padding-left:18px;color:rgba(24,20,18,.56);font-size:.84rem;line-height:1.7}}
   .section-label{{margin-bottom:14px;font-size:.82rem;letter-spacing:.14em;color:rgba(24,20,18,.42);text-transform:uppercase}}
 .platforms{{display:flex;flex-direction:column;gap:12px}}
-.plat{{display:flex;align-items:center;gap:14px;padding:16px 18px;border:1px solid rgba(24,20,18,.08);border-radius:18px;background:rgba(255,252,248,.78);transition:transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease}}
-.plat:hover{{transform:translateY(-1px);border-color:rgba(24,20,18,.16);background:rgba(255,255,255,.92);box-shadow:0 16px 28px rgba(94,62,39,.08)}}
-.plat-icon{{width:48px;height:48px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:14px;background:rgba(255,255,255,.66);border:1px solid rgba(24,20,18,.08)}}
+.plat{{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid rgba(30,25,20,.08);border-radius:12px;background:rgba(255,255,255,.5);transition:border-color .18s ease, background .18s ease}}
+.plat:hover{{border-color:rgba(30,25,20,.16);background:rgba(255,255,255,.85)}}
+.plat-icon{{width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:10px;background:rgba(255,255,255,.7);border:1px solid rgba(30,25,20,.08)}}
 .plat-icon svg{{width:24px;height:24px;fill:currentColor;display:block}}
 .plat-icon-windows{{color:#1889d6}}
 .plat-icon-apple{{color:#181412}}
@@ -873,21 +869,20 @@ a{{color:inherit;text-decoration:none}}
 .plat-info{{flex:1;min-width:0}}
 .plat-name{{font-size:1rem;font-weight:700}}
 .plat-detail{{margin-top:4px;font-size:.86rem;color:rgba(24,20,18,.52);line-height:1.55}}
-.plat-badge{{display:inline-flex;align-items:center;justify-content:center;min-width:74px;height:40px;padding:0 14px;border-radius:12px;background:linear-gradient(135deg,#c97953,#e0a077);color:#fff8f2;font-size:.86rem;font-weight:700;white-space:nowrap}}
+.plat-badge{{display:inline-flex;align-items:center;justify-content:center;min-width:74px;height:38px;padding:0 14px;border-radius:8px;background:var(--accent);color:#fff8f2;font-size:.86rem;font-weight:700;white-space:nowrap}}
 .footnote{{margin-top:16px;font-size:.84rem;color:rgba(24,20,18,.48);line-height:1.7}}
 @media (max-width:1080px){{
   .hero{{grid-template-columns:1fr}}
 }}
 @media (max-width:720px){{
   .page{{padding:20px 20px 36px}}
-  .hero-copy,.hero-panel{{border-radius:20px}}
-  .hero-copy{{padding:26px}}
-  .app-top{{padding:22px 22px 16px}}
-  .platform-wrap{{padding:20px}}
+  .hero{{padding-top:28px;gap:24px}}
+  .app-top{{padding:20px 20px 16px}}
+  .platform-wrap{{padding:18px}}
   .app-head{{align-items:flex-start}}
-  .icon{{width:68px;height:68px;border-radius:18px}}
-  .app-title{{font-size:1.6rem}}
-  .title{{font-size:clamp(2.8rem,14vw,4.4rem)}}
+  .icon{{width:60px;height:60px;border-radius:12px}}
+  .app-title{{font-size:1.35rem}}
+  .title{{font-size:clamp(1.9rem,8vw,2.6rem)}}
 }}
 </style>
 </head>

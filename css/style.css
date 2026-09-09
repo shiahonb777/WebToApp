@@ -1168,7 +1168,7 @@ section {
 .history-head h2 {
   margin-top: 8px;
   font-family: var(--font-serif);
-  font-size: 1.9rem;
+  font-size: 1.5rem;
   font-weight: 600;
 }
 
@@ -1228,17 +1228,17 @@ section {
 .history-list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
 }
 
 .history-card {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 18px;
-  padding: 20px 22px;
-  border: 1px solid rgba(30, 25, 20, 0.08);
-  border-radius: 14px;
-  background: rgba(255, 252, 247, 0.64);
+  padding: 22px 0;
+}
+
+.history-card + .history-card {
+  border-top: 1px solid var(--line);
 }
 
 .history-main {
@@ -1253,12 +1253,12 @@ section {
 }
 
 .history-icon {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   flex-shrink: 0;
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid rgba(30, 25, 20, 0.08);
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.7);
   object-fit: cover;
 }
 
@@ -1298,16 +1298,17 @@ section {
 
 .history-breakdown-row {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   gap: 12px;
-  min-height: 42px;
-  padding: 0 14px;
-  border: 1px solid rgba(30, 25, 20, 0.06);
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.36);
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(30, 25, 20, 0.06);
   color: rgba(30, 25, 20, 0.58);
   font-size: 0.82rem;
+}
+
+.history-breakdown-row:last-child {
+  border-bottom: 0;
 }
 
 .history-breakdown-row strong {
@@ -1393,7 +1394,7 @@ section {
 
 .result-panel h2 {
   font-family: var(--font-serif);
-  font-size: 1.88rem;
+  font-size: 1.5rem;
   letter-spacing: 0;
   font-weight: 600;
 }
@@ -1413,7 +1414,7 @@ section {
   overflow: hidden;
   border: 1px solid rgba(30, 25, 20, 0.1);
   border-radius: 12px;
-  background: rgba(255, 252, 247, 0.86);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .result-link-wrap input {
@@ -1460,7 +1461,7 @@ section {
   gap: 12px;
   padding: 14px 16px;
   border-bottom: 1px solid rgba(30, 25, 20, 0.08);
-  background: rgba(247, 241, 233, 0.78);
+  background: rgba(250, 246, 240, 0.9);
 }
 
 .preview-shell-chrome {
