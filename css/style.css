@@ -1885,3 +1885,82 @@ section {
   letter-spacing: .04em;
   vertical-align: middle;
 }
+
+/* ===== History selection mode (bulk clean-up) ===== */
+.history-check input,
+.history-select-all input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.history-check {
+  display: none;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.history-list.selecting .history-check {
+  display: inline-flex;
+}
+
+.history-list.selecting .history-card {
+  padding-inline: 12px;
+  margin-inline: -12px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.history-card.selected {
+  background: rgba(201, 121, 83, 0.08);
+}
+
+.history-list.selecting .history-actions {
+  display: none;
+}
+
+.history-select-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.history-select-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.history-select-count {
+  color: var(--ink-faint);
+  font-size: 0.84rem;
+}
+
+.history-select-actions {
+  display: inline-flex;
+  gap: 10px;
+  margin-inline-start: auto;
+}
+
+.history-delete-selected {
+  color: #9f4b42;
+  border-color: rgba(186, 96, 81, 0.35);
+  background: rgba(186, 96, 81, 0.08);
+}
+
+.history-delete-selected:hover {
+  background: rgba(186, 96, 81, 0.14);
+}
+
+.history-delete-selected:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+}
