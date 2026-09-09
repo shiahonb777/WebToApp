@@ -151,8 +151,6 @@
     'history.export': 'Export history',
     'history.import': 'Import history',
     'history.empty': 'No build history on this device yet. Generate an app first, or import a record exported from another device.',
-    'history.recover': 'Recover existing builds',
-    'history.recovering': 'Recovering...',
     'history.justNow': 'Just now',
     'history.visits': 'Visits {n}',
     'history.downloads': 'Downloads {n}',
@@ -214,7 +212,6 @@
     'err.exportRetry': 'Export failed, please retry',
     'err.importFormat': 'Import failed, please check the file format',
     'err.removeRetry': 'Remove failed, please retry',
-    'err.recoverRetry': 'Recover failed, please retry'
   });
 
   // ---------- 简体中文 ----------
@@ -361,8 +358,6 @@
     'history.export': '导出历史',
     'history.import': '导入历史',
     'history.empty': '当前设备还没有历史构建。先生成一个应用，或者导入另一台设备导出的记录。',
-    'history.recover': '恢复已有构建',
-    'history.recovering': '恢复中...',
     'history.justNow': '刚刚',
     'history.visits': '访问 {n} 次',
     'history.downloads': '下载 {n} 次',
@@ -424,7 +419,6 @@
     'err.exportRetry': '导出失败，请重试',
     'err.importFormat': '导入失败，请确认文件格式正确',
     'err.removeRetry': '移除失败，请重试',
-    'err.recoverRetry': '恢复失败，请重试'
   });
 
   // ---------- 日本語 ----------
@@ -547,8 +541,6 @@
     'history.export': '履歴をエクスポート',
     'history.import': '履歴をインポート',
     'history.empty': 'このデバイスにはまだビルド履歴がありません。まずアプリを生成するか、別のデバイスからエクスポートした記録をインポートしてください。',
-    'history.recover': '既存のビルドを復元',
-    'history.recovering': '復元中...',
     'history.justNow': 'たった今',
     'history.visits': 'アクセス {n} 回',
     'history.downloads': 'ダウンロード {n} 回',
@@ -610,7 +602,6 @@
     'err.exportRetry': 'エクスポートに失敗しました。再試行してください',
     'err.importFormat': 'インポートに失敗しました。ファイル形式を確認してください',
     'err.removeRetry': '削除に失敗しました。再試行してください',
-    'err.recoverRetry': '復元に失敗しました。再試行してください'
   });
 
   // ---------- العربية (RTL) ----------
@@ -733,8 +724,6 @@
     'history.export': 'تصدير السجل',
     'history.import': 'استيراد السجل',
     'history.empty': 'لا يوجد سجل إنشاء على هذا الجهاز بعد. أنشئ تطبيقًا أولاً، أو استورد سجلًا مُصدَّرًا من جهاز آخر.',
-    'history.recover': 'استعادة الإصدارات الموجودة',
-    'history.recovering': 'جارٍ الاستعادة...',
     'history.justNow': 'الآن',
     'history.visits': 'الزيارات {n}',
     'history.downloads': 'التنزيلات {n}',
@@ -796,7 +785,6 @@
     'err.exportRetry': 'فشل التصدير، يرجى إعادة المحاولة',
     'err.importFormat': 'فشل الاستيراد، يرجى التحقق من صيغة الملف',
     'err.removeRetry': 'فشلت الإزالة، يرجى إعادة المحاولة',
-    'err.recoverRetry': 'فشلت الاستعادة، يرجى إعادة المحاولة'
   });
 
   // ---------- Русский ----------
@@ -919,8 +907,6 @@
     'history.export': 'Экспорт истории',
     'history.import': 'Импорт истории',
     'history.empty': 'На этом устройстве пока нет истории сборок. Сначала создайте приложение или импортируйте запись, экспортированную с другого устройства.',
-    'history.recover': 'Восстановить существующие сборки',
-    'history.recovering': 'Восстановление...',
     'history.justNow': 'Только что',
     'history.visits': 'Посещений {n}',
     'history.downloads': 'Загрузок {n}',
@@ -982,7 +968,6 @@
     'err.exportRetry': 'Ошибка экспорта, повторите попытку',
     'err.importFormat': 'Ошибка импорта, проверьте формат файла',
     'err.removeRetry': 'Не удалось удалить, повторите попытку',
-    'err.recoverRetry': 'Не удалось восстановить, повторите попытку'
   });
 
   // ---------- Español ----------
@@ -1105,8 +1090,6 @@
     'history.export': 'Exportar historial',
     'history.import': 'Importar historial',
     'history.empty': 'Aún no hay historial de compilaciones en este dispositivo. Genera una app primero, o importa un registro exportado desde otro dispositivo.',
-    'history.recover': 'Recuperar compilaciones existentes',
-    'history.recovering': 'Recuperando...',
     'history.justNow': 'Ahora mismo',
     'history.visits': 'Visitas {n}',
     'history.downloads': 'Descargas {n}',
@@ -1168,7 +1151,6 @@
     'err.exportRetry': 'Error al exportar, inténtalo de nuevo',
     'err.importFormat': 'Error al importar, comprueba el formato del archivo',
     'err.removeRetry': 'Error al quitar, inténtalo de nuevo',
-    'err.recoverRetry': 'Error al recuperar, inténtalo de nuevo'
   });
 
   // ---------- Português ----------
@@ -1291,8 +1273,6 @@
     'history.export': 'Exportar histórico',
     'history.import': 'Importar histórico',
     'history.empty': 'Ainda não há histórico de compilações neste dispositivo. Gere um app primeiro, ou importe um registro exportado de outro dispositivo.',
-    'history.recover': 'Recuperar compilações existentes',
-    'history.recovering': 'Recuperando...',
     'history.justNow': 'Agora mesmo',
     'history.visits': 'Visitas {n}',
     'history.downloads': 'Downloads {n}',
@@ -1354,7 +1334,6 @@
     'err.exportRetry': 'Falha ao exportar, tente novamente',
     'err.importFormat': 'Falha ao importar, verifique o formato do arquivo',
     'err.removeRetry': 'Falha ao remover, tente novamente',
-    'err.recoverRetry': 'Falha ao recuperar, tente novamente'
   });
 
   // ---------- Français ----------
@@ -1477,8 +1456,6 @@
     'history.export': 'Exporter l\u2019historique',
     'history.import': 'Importer l\u2019historique',
     'history.empty': 'Aucun historique de builds sur cet appareil pour le moment. Générez d\u2019abord une application, ou importez un enregistrement exporté depuis un autre appareil.',
-    'history.recover': 'Récupérer les builds existants',
-    'history.recovering': 'Récupération...',
     'history.justNow': 'À l\u2019instant',
     'history.visits': 'Visites {n}',
     'history.downloads': 'Téléchargements {n}',
@@ -1540,7 +1517,6 @@
     'err.exportRetry': 'Échec de l\u2019exportation, veuillez réessayer',
     'err.importFormat': 'Échec de l\u2019importation, vérifiez le format du fichier',
     'err.removeRetry': 'Échec du retrait, veuillez réessayer',
-    'err.recoverRetry': 'Échec de la récupération, veuillez réessayer'
   });
 
   // ---------- Deutsch ----------
@@ -1663,8 +1639,6 @@
     'history.export': 'Verlauf exportieren',
     'history.import': 'Verlauf importieren',
     'history.empty': 'Noch kein Build-Verlauf auf diesem Gerät. Generiere zuerst eine App oder importiere einen von einem anderen Gerät exportierten Datensatz.',
-    'history.recover': 'Vorhandene Builds wiederherstellen',
-    'history.recovering': 'Wiederherstellung...',
     'history.justNow': 'Gerade eben',
     'history.visits': 'Besuche {n}',
     'history.downloads': 'Downloads {n}',
@@ -1726,6 +1700,5 @@
     'err.exportRetry': 'Export fehlgeschlagen, bitte erneut versuchen',
     'err.importFormat': 'Import fehlgeschlagen, bitte Dateiformat prüfen',
     'err.removeRetry': 'Entfernen fehlgeschlagen, bitte erneut versuchen',
-    'err.recoverRetry': 'Wiederherstellung fehlgeschlagen, bitte erneut versuchen'
   });
 })();

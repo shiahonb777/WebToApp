@@ -101,3 +101,75 @@ class EntryCacheHeaderTests(unittest.TestCase):
         resp = self.client.get("/css/style.css")
         self.assertEqual(resp.status_code, 200)
         self.assertIn("max-age=86400", resp.headers.get("cache-control", ""))
+
+
+class HistoryBulkDeleteTests(unittest.TestCase):
+    """POST /api/history/delete-bulk — one request replaces the per-id DELETE
+    fan-out that froze the server (issue #59), and the old /api/history/recover
+    endpoint (which attached every app on the server to the caller) is gone."""
+
+    FP = "test-device-fp"
+
+    def setUp(self):
+        self.client = TestClient(main.app)
+        self._tmp = tempfile.TemporaryDirectory()
+        self.apps_dir = Path(self._tmp.name)
+        self.original_apps_dir = main.APPS_DIR
+        self.original_store = main.history_store
+        main.APPS_DIR = self.apps_dir
+        main.history_store = __import__("server.history_store", fromlist=["HistoryStore"]).HistoryStore(
+            self.apps_dir / "_history.json"
+        )
+
+    def tearDown(self):
+        main.APPS_DIR = self.original_apps_dir
+        main.history_store = self.original_store
+        self._tmp.cleanup()
+
+    def _record(self, app_id):
+        (self.apps_dir / app_id).mkdir(parents=True, exist_ok=True)
+        main.history_store.record_build(self.FP, {"id": app_id, "name": app_id, "url": f"https://{app_id}.test"}, f"/a/{app_id}", None)
+
+    def _cookies(self):
+        return {"webtoapp_device_fingerprint": self.FP}
+
+    def test_bulk_delete_removes_only_requested_ids(self):
+        for app_id in ("a1", "b2", "c3"):
+            self._record(app_id)
+        resp = self.client.post(
+            "/api/history/delete-bulk",
+            json={"app_ids": ["a1", "c3", "missing"]},
+            cookies=self._cookies(),
+        )
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.json()["removed"], ["a1", "c3"])
+        remaining = [item["app_id"] for item in resp.json()["history"]["items"]]
+        self.assertEqual(remaining, ["b2"])
+
+    def test_bulk_delete_requires_device_fingerprint(self):
+        resp = self.client.post("/api/history/delete-bulk", json={"app_ids": ["a1"]})
+        self.assertEqual(resp.status_code, 400)
+
+    def test_bulk_delete_rejects_oversized_payload(self):
+        app_ids = [f"app{i}" for i in range(main.HISTORY_BULK_DELETE_MAX + 1)]
+        resp = self.client.post(
+            "/api/history/delete-bulk",
+            json={"app_ids": app_ids},
+            cookies=self._cookies(),
+        )
+        self.assertEqual(resp.status_code, 400)
+
+    def test_bulk_delete_empty_list_is_a_noop(self):
+        resp = self.client.post(
+            "/api/history/delete-bulk",
+            json={"app_ids": []},
+            cookies=self._cookies(),
+        )
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.json()["removed"], [])
+
+    def test_recover_endpoint_is_removed(self):
+        # 405 (matches the DELETE /{app_id} route as "recover") proves no POST
+        # recover handler exists anymore.
+        resp = self.client.post("/api/history/recover", cookies=self._cookies())
+        self.assertIn(resp.status_code, (404, 405))
